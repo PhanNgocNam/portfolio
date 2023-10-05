@@ -36,9 +36,7 @@ const ContactForm = React.forwardRef((props, ref) => {
         email,
         message: msg,
       });
-      setEmail("");
-      setName("");
-      setMsg("");
+
       if (data?.code === 200) return toast.success("I'll contact you soon!");
     } catch (err) {
       toast.error(err.message);
