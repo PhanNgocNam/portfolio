@@ -31,7 +31,7 @@ const ContactForm = React.forwardRef((props, ref) => {
         position: toast.POSITION.TOP_CENTER,
       });
     try {
-      const data = await post("http://localhost:8080/message", {
+      const data = await post("https://msv-hjnu.onrender.com/message", {
         name,
         email,
         message: msg,
