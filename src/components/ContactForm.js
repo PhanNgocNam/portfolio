@@ -31,11 +31,12 @@ const ContactForm = React.forwardRef((props, ref) => {
         position: toast.POSITION.TOP_CENTER,
       });
     try {
-      const data = await post("https://msv-hjnu.onrender.com/message", {
-        name,
-        email,
-        message: msg,
-      });
+      const data = await post(
+        `https://msv-hjnu.onrender.com/message?mail=${email}&name=${name}`,
+        {
+          message: msg,
+        }
+      );
 
       if (data?.code === 200) return toast.success("I'll contact you soon!");
     } catch (err) {

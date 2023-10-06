@@ -7,11 +7,11 @@ const SkillSection = React.forwardRef((props, ref) => {
       <h1 className="text-center text-[1rem] uppercase pb-4 text-royalblue-100">
         My Skills
       </h1>
-      <div className="grid grid-cols-3 grid-rows-4 gap-2 md:grid-cols-6 md:grid-rows-2 lg:grid-cols-12 lg:grid-rows-1">
+      <div className="grid grid-cols-3 grid-rows-4 gap-2 md:grid-cols-6 md:grid-rows-2 lg:flex lg:flex-wrap lg:gap-0 lg:gap-y-4 lg:justify-between">
         {skillItems?.map((item, index) => (
           <div
             key={index}
-            className={`${item.style} flex flex-col items-center cursor-help`}
+            className={`${item.style} flex flex-col items-center cursor-help lg:w-[20%] lg:border lg:border-solid lg:py-4 lg:border-gray-100/10 lg:rounded-lg`}
           >
             <img
               alt={item.title}
