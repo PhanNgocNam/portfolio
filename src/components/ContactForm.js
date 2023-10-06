@@ -7,11 +7,14 @@ import { post } from "../utils/post";
 import { FiSend } from "react-icons/fi";
 import { AiFillFacebook } from "react-icons/ai";
 import { SiZalo } from "react-icons/si";
+import { CgSpinnerTwo } from "react-icons/cg";
 
 const ContactForm = React.forwardRef((props, ref) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [msg, setMsg] = useState("");
+  const [isPending, setIsPending] = useState(false);
+
   const notify = async () => {
     if (!name)
       return toast.warn("Name is required!", {
@@ -31,12 +34,19 @@ const ContactForm = React.forwardRef((props, ref) => {
         position: toast.POSITION.TOP_CENTER,
       });
     try {
+      setIsPending(true);
       const data = await post(
         `https://msv-hjnu.onrender.com/message?mail=${email}&name=${name}`,
         {
           message: msg,
         }
       );
+
+      setEmail("");
+      setMsg("");
+      setName("");
+
+      data && setIsPending(false);
 
       if (data?.code === 200) return toast.success("I'll contact you soon!");
     } catch (err) {
@@ -123,7 +133,12 @@ const ContactForm = React.forwardRef((props, ref) => {
             className="cursor-pointer [border:none] py-[1.06rem] px-[2.06rem] bg-darkslateblue rounded-31xl flex flex-row items-start justify-start"
           >
             <b className="relative text-[1.25rem] leading-[1.25rem]  text-white text-left flex items-center">
-              Send <FiSend size={20} className="pl-2" />
+              Send{" "}
+              {isPending ? (
+                <CgSpinnerTwo size={20} className="ml-2 animate-spin" />
+              ) : (
+                <FiSend size={20} className="pl-2" />
+              )}
             </b>
             <ToastContainer />
           </button>
